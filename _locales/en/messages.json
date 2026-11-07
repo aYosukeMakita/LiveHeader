@@ -1,0 +1,93 @@
+{
+  "extName": {
+    "message": "LiveHeader"
+  },
+  "extDescription": {
+    "message": "Add custom HTTP headers to requests and responses."
+  },
+  "profiles": {
+    "message": "PROFILES"
+  },
+  "addProfile": {
+    "message": "＋ Create Profile"
+  },
+  "requestHeaders": {
+    "message": "REQUEST HEADERS"
+  },
+  "responseHeaders": {
+    "message": "RESPONSE HEADERS"
+  },
+  "filters": {
+    "message": "FILTERS"
+  },
+  "active": {
+    "message": "Active"
+  },
+  "inactive": {
+    "message": "Inactive"
+  },
+  "addHeader": {
+    "message": "＋ Add Header"
+  },
+  "addFilter": {
+    "message": "＋ Add Filter"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "rename": {
+    "message": "Rename"
+  },
+  "toggle": {
+    "message": "Click to toggle"
+  },
+  "noProfiles": {
+    "message": "No profiles. Click Create Profile to add one."
+  },
+  "noHeaders": {
+    "message": "No headers."
+  },
+  "noFilters": {
+    "message": "No filters: applies to all sites."
+  },
+  "filterHint": {
+    "message": "Partial URL match (host optional, * = wildcard)"
+  },
+  "headerName": {
+    "message": "Header name"
+  },
+  "headerValue": {
+    "message": "Value"
+  },
+  "filterPattern": {
+    "message": "URL pattern"
+  },
+  "httpMethod": {
+    "message": "HTTP method"
+  },
+  "anyMethod": {
+    "message": "ANY"
+  },
+  "toggleHeader": {
+    "message": "Enable or disable this header"
+  },
+  "toggleFilter": {
+    "message": "Enable or disable this filter"
+  },
+  "defaultProfileName": {
+    "message": "Profile $N$",
+    "placeholders": { "N": { "content": "$1" } }
+  },
+  "errHeaderName": {
+    "message": "Invalid header name. Spaces and some symbols can't be used."
+  },
+  "errFilterComplex": {
+    "message": "This filter is too long or complex. Shorten it or use fewer *."
+  },
+  "errFilterSyntax": {
+    "message": "This filter can't be used."
+  },
+  "profileBlocked": {
+    "message": "This profile is not applied until the errors below are fixed."
+  }
+}

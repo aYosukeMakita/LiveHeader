@@ -1,0 +1,93 @@
+{
+  "extName": {
+    "message": "LiveHeader"
+  },
+  "extDescription": {
+    "message": "リクエスト・レスポンスに任意の HTTP ヘッダーを付加します。"
+  },
+  "profiles": {
+    "message": "プロファイル"
+  },
+  "addProfile": {
+    "message": "＋ プロファイル追加"
+  },
+  "requestHeaders": {
+    "message": "リクエストヘッダー"
+  },
+  "responseHeaders": {
+    "message": "レスポンスヘッダー"
+  },
+  "filters": {
+    "message": "フィルター"
+  },
+  "active": {
+    "message": "有効"
+  },
+  "inactive": {
+    "message": "無効"
+  },
+  "addHeader": {
+    "message": "＋ ヘッダー追加"
+  },
+  "addFilter": {
+    "message": "＋ フィルター追加"
+  },
+  "delete": {
+    "message": "削除"
+  },
+  "rename": {
+    "message": "名前を変更"
+  },
+  "toggle": {
+    "message": "クリックで切り替え"
+  },
+  "noProfiles": {
+    "message": "プロファイルがありません。プロファイル追加で作成してください。"
+  },
+  "noHeaders": {
+    "message": "ヘッダーがありません。"
+  },
+  "noFilters": {
+    "message": "フィルターなし: すべてのサイトに適用されます。"
+  },
+  "filterHint": {
+    "message": "URL部分一致（ホスト名省略可、*で任意文字列）"
+  },
+  "headerName": {
+    "message": "ヘッダー名"
+  },
+  "headerValue": {
+    "message": "値"
+  },
+  "filterPattern": {
+    "message": "URLパターン"
+  },
+  "httpMethod": {
+    "message": "HTTPメソッド"
+  },
+  "anyMethod": {
+    "message": "すべて"
+  },
+  "toggleHeader": {
+    "message": "このヘッダーの有効/無効を切り替え"
+  },
+  "toggleFilter": {
+    "message": "このフィルターの有効/無効を切り替え"
+  },
+  "defaultProfileName": {
+    "message": "プロファイル $N$",
+    "placeholders": { "N": { "content": "$1" } }
+  },
+  "errHeaderName": {
+    "message": "ヘッダー名が不正です。空白や一部の記号は使えません。"
+  },
+  "errFilterComplex": {
+    "message": "フィルターが長すぎるか複雑すぎます。短くするか、*を減らしてください。"
+  },
+  "errFilterSyntax": {
+    "message": "このフィルターは使用できません。"
+  },
+  "profileBlocked": {
+    "message": "下のエラーが解消されるまで、このプロファイルは適用されません。"
+  }
+}
