@@ -1,4 +1,5 @@
-importScripts('shared.js')
+// Chrome は service_worker、Firefox は background.scripts (shared.js を先に読み込み済み) で起動する
+if (typeof importScripts === 'function') importScripts('shared.js')
 
 const RESOURCE_TYPES = [
   'main_frame',
@@ -23,12 +24,12 @@ function toHeaderInfo(headers) {
 }
 
 function updateBadge(count, error) {
-  chrome.action.setBadgeText({ text: error ? '!' : count ? String(count) : '' })
-  chrome.action.setBadgeBackgroundColor({ color: error ? '#c62828' : '#1b7f3b' })
+  ext.action.setBadgeText({ text: error ? '!' : count ? String(count) : '' })
+  ext.action.setBadgeBackgroundColor({ color: error ? '#c62828' : '#1b7f3b' })
 }
 
 async function syncRules() {
-  const { profiles = [] } = await chrome.storage.local.get('profiles')
+  const { profiles = [] } = await ext.storage.local.get('profiles')
   const addRules = []
   let id = 1
   let active = 0
@@ -67,9 +68,9 @@ async function syncRules() {
     for (const condition of conditions) addRules.push({ id: id++, priority: 1, action, condition })
   }
 
-  const existing = await chrome.declarativeNetRequest.getDynamicRules()
+  const existing = await ext.declarativeNetRequest.getDynamicRules()
   try {
-    await chrome.declarativeNetRequest.updateDynamicRules({
+    await ext.declarativeNetRequest.updateDynamicRules({
       removeRuleIds: existing.map(r => r.id),
       addRules,
     })
@@ -86,8 +87,8 @@ function queueSync() {
   syncChain = syncChain.then(syncRules, syncRules)
 }
 
-chrome.runtime.onInstalled.addListener(queueSync)
-chrome.runtime.onStartup.addListener(queueSync)
-chrome.storage.onChanged.addListener((changes, area) => {
+ext.runtime.onInstalled.addListener(queueSync)
+ext.runtime.onStartup.addListener(queueSync)
+ext.storage.onChanged.addListener((changes, area) => {
   if (area === 'local' && changes.profiles) queueSync()
 })
