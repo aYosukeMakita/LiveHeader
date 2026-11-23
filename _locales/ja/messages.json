@@ -89,5 +89,18 @@
   },
   "profileBlocked": {
     "message": "下のエラーが解消されるまで、このプロファイルは適用されません。"
+  },
+  "hostPermissionMissing": {
+    "message": "ウェブサイトへのアクセスが許可されていないため、ヘッダーが適用されません。"
+  },
+  "grantHostPermission": {
+    "message": "アクセスを許可"
+  },
+  "hostPermissionLimited": {
+    "message": "サイトへのアクセスが一部制限されています。許可されたサイトにのみヘッダーが適用されます。"
+  },
+  "moreSites": {
+    "message": "ほか$N$件",
+    "placeholders": { "N": { "content": "$1" } }
   }
 }

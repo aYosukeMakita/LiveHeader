@@ -15,8 +15,14 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; width: 800px; height: 540px; background: var(--bg); color: var(--text);
-  font: 14px system-ui, sans-serif; }
-.app { display: flex; height: 100%; }
+  font: 14px system-ui, sans-serif; display: flex; flex-direction: column; }
+.app { display: flex; flex: 1; min-height: 0; }
+.permbanner { flex: none; display: flex; align-items: center; gap: 12px; padding: 8px 14px;
+  background: var(--danger-bg); color: var(--danger); font-size: 13px; }
+.permbanner span { flex: 1; }
+.permnotice { flex: none; display: flex; gap: 8px; padding: 6px 14px; border-bottom: 1px solid var(--border);
+  color: var(--muted); font-size: 12px; white-space: nowrap; }
+.permsites { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .side { width: 230px; background: var(--side); padding: 14px; display: flex; flex-direction: column;
   border-right: 1px solid var(--border); }
 .side h2 { margin: 0 0 12px; font-size: 14px; color: var(--muted); letter-spacing: .03em; }

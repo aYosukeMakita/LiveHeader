@@ -8,6 +8,14 @@
 </head>
 
 <body>
+  <div id="permBanner" class="permbanner" hidden>
+    <span data-i18n="hostPermissionMissing"></span>
+    <button id="grantPerm" class="btn" data-i18n="grantHostPermission">Allow access</button>
+  </div>
+  <div id="permNotice" class="permnotice" hidden>
+    <span data-i18n="hostPermissionLimited"></span>
+    <span id="permSites" class="permsites"></span>
+  </div>
   <div class="app">
     <aside class="side">
       <h2 data-i18n="profiles">PROFILES</h2>

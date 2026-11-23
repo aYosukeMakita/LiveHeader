@@ -1,12 +1,12 @@
 const TRASH =
-  '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/></svg>'
+  '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/></svg>'
 const PENCIL =
-  '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>'
+  '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>'
 
 let state = { profiles: [], selectedId: null, errors: {} }
 let renaming = false
 
-const t = (k, ...subs) => chrome.i18n.getMessage(k, subs)
+const t = (k, ...subs) => ext.i18n.getMessage(k, subs)
 const uid = () => Math.random().toString(36).slice(2, 10)
 const $ = s => document.querySelector(s)
 const sel = () => state.profiles.find(p => p.id === state.selectedId)
@@ -25,7 +25,7 @@ function newProfile() {
 }
 
 function save() {
-  chrome.storage.local.set({ profiles: state.profiles, selectedId: state.selectedId })
+  ext.storage.local.set({ profiles: state.profiles, selectedId: state.selectedId })
   scheduleValidate()
 }
 function commit(focus) {
@@ -39,10 +39,14 @@ const focusSelected = () => $('.pitem.sel .pname')?.focus()
 const focusLast = key => [...document.querySelectorAll(`[data-sec="${key}"]`)].pop()?.focus()
 const focusAdd = key => $(`[data-add="${key}"]`)?.focus()
 
+// innerHTML を使わずに固定の SVG 文字列から要素を作る (AMO の審査対策)
+const svgIcon = src =>
+  document.importNode(new DOMParser().parseFromString(src, 'image/svg+xml').documentElement, true)
+
 function el(tag, props = {}, ...kids) {
   const e = document.createElement(tag)
   for (const [k, v] of Object.entries(props)) {
-    if (k === 'html') e.innerHTML = v
+    if (k === 'icon') e.append(svgIcon(v))
     else if (k.startsWith('on')) e.addEventListener(k.slice(2), v)
     else if (k === 'class') e.className = v
     else if (k.startsWith('data-') || k.startsWith('aria-') || k === 'role') e.setAttribute(k, v)
@@ -156,7 +160,7 @@ function renderList() {
           class: 'icon',
           title: t('delete'),
           'aria-label': t('delete') + ': ' + p.name,
-          html: TRASH,
+          icon: TRASH,
           onclick: e => {
             e.stopPropagation()
             state.profiles = state.profiles.filter(x => x.id !== p.id)
@@ -231,7 +235,7 @@ function renderHeaders(p, key, label) {
         class: 'icon',
         title: t('delete'),
         'aria-label': t('delete'),
-        html: TRASH,
+        icon: TRASH,
         onclick: () => {
           p[key] = p[key].filter(x => x !== h)
           commit(() => focusAdd(key))
@@ -304,7 +308,7 @@ function renderMain() {
           class: 'icon',
           title: t('rename'),
           'aria-label': t('rename'),
-          html: PENCIL,
+          icon: PENCIL,
           onclick: () => {
             renaming = true
             renderMain()
@@ -383,7 +387,7 @@ function renderMain() {
         class: 'icon',
         title: t('delete'),
         'aria-label': t('delete'),
-        html: TRASH,
+        icon: TRASH,
         onclick: () => {
           p.filters = p.filters.filter(x => x !== f)
           commit(() => focusAdd('filters'))
@@ -410,12 +414,33 @@ function render() {
   applyErrors()
 }
 
+// Chrome・Firefox とも利用者がサイトへのアクセスを制限でき、許可のないサイトではヘッダーが適用されない。
+// どのサイトにも許可がない場合は警告、一部のサイトだけ許可されている場合は許可先をお知らせとして表示する
+const HOST_PERMISSION = { origins: ['<all_urls>'] }
+const SHOWN_SITES = 2
+// "https://staging.example.com/*" → "staging.example.com"
+const siteLabel = origin => origin.replace(/^[^:]+:\/\//, '').replace(/\/\*?$/, '')
+
+async function checkHostPermission() {
+  const [all, { origins = [] }] = await Promise.all([ext.permissions.contains(HOST_PERMISSION), ext.permissions.getAll()])
+  const limited = !all && origins.length > 0
+  $('#permBanner').hidden = all || limited
+  $('#permNotice').hidden = !limited
+  if (limited) {
+    const sites = [...new Set(origins.map(siteLabel))]
+    const more = sites.length - SHOWN_SITES
+    $('#permSites').textContent =
+      sites.slice(0, SHOWN_SITES).join(', ') + (more > 0 ? ' ' + t('moreSites', more) : '')
+    $('#permSites').title = sites.join('\n')
+  }
+}
+
 async function init() {
-  document.documentElement.lang = chrome.i18n.getUILanguage()
+  document.documentElement.lang = ext.i18n.getUILanguage()
   document.querySelectorAll('[data-i18n]').forEach(e => {
     e.textContent = t(e.dataset.i18n)
   })
-  const data = await chrome.storage.local.get(['profiles', 'selectedId'])
+  const data = await ext.storage.local.get(['profiles', 'selectedId'])
   state.profiles = data.profiles || []
   state.selectedId = data.selectedId
   if (!state.profiles.length) {
@@ -432,6 +457,9 @@ async function init() {
     renaming = false
     commit(focusSelected)
   })
+  // permissions.request はユーザー操作の直後に同期的に呼ぶ必要がある
+  $('#grantPerm').addEventListener('click', () => ext.permissions.request(HOST_PERMISSION).then(checkHostPermission))
+  checkHostPermission()
   render()
   validateAll()
 }

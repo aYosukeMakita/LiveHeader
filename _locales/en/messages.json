@@ -89,5 +89,18 @@
   },
   "profileBlocked": {
     "message": "This profile is not applied until the errors below are fixed."
+  },
+  "hostPermissionMissing": {
+    "message": "LiveHeader can't access websites, so headers are not applied."
+  },
+  "grantHostPermission": {
+    "message": "Allow access"
+  },
+  "hostPermissionLimited": {
+    "message": "Site access is limited. Headers are applied only to allowed sites."
+  },
+  "moreSites": {
+    "message": "and $N$ more",
+    "placeholders": { "N": { "content": "$1" } }
   }
 }

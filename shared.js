@@ -1,3 +1,6 @@
+// Firefox は browser.*、Chrome は chrome.* (どちらも Promise を返す)
+const ext = globalThis.browser ?? globalThis.chrome
+
 // background.js と popup.js で共有するフィルター処理
 // URL でパーセントエンコードされる ASCII 文字
 const PERCENT_ENCODED = { ' ': '%20', '"': '%22', '<': '%3C', '>': '%3E' }
@@ -37,7 +40,7 @@ async function filterError(f) {
   const regex = patternToRegexSource(pattern)
   if (!regexSupportCache.has(regex)) {
     if (regexSupportCache.size > 200) regexSupportCache.clear()
-    regexSupportCache.set(regex, await chrome.declarativeNetRequest.isRegexSupported({ regex, isCaseSensitive: false }))
+    regexSupportCache.set(regex, await ext.declarativeNetRequest.isRegexSupported({ regex, isCaseSensitive: false }))
   }
   const r = regexSupportCache.get(regex)
   if (r.isSupported) return null

@@ -1,16 +1,16 @@
 # Privacy Policy / プライバシーポリシー
 
-Effective date: November 7, 2026
+Effective date: November 23, 2026
 
 ## English
 
-LiveHeader is a Chrome extension that lets users configure custom HTTP request and response headers and apply them to matching traffic.
+LiveHeader is a browser extension for Chrome and Firefox that lets users configure custom HTTP request and response headers and apply them to matching traffic.
 
 ### Information stored locally
 
-LiveHeader stores the following settings in Chrome's local extension storage (`chrome.storage.local`): profile names and enabled states; user-entered request and response header names and values; URL patterns and HTTP methods; and the ID of the selected profile.
+LiveHeader stores the following settings in the browser's local extension storage (`chrome.storage.local`): profile names and enabled states; user-entered request and response header names and values; URL patterns and HTTP methods; and the ID of the selected profile.
 
-The extension does not create or store a browsing-history log, page titles, access times, page contents, or cookies. Chrome's Declarative Net Request engine evaluates current request URLs and methods against the rules configured by the user so that matching rules can be applied. These URLs are not sent to the publisher or recorded by LiveHeader.
+The extension does not create or store a browsing-history log, page titles, access times, page contents, or cookies. The browser's Declarative Net Request engine evaluates current request URLs and methods against the rules configured by the user so that matching rules can be applied. These URLs are not sent to the publisher or recorded by LiveHeader.
 
 ### How information is used and shared
 
@@ -20,7 +20,7 @@ LiveHeader does not transmit profiles, header values, matched URLs, or other bro
 
 ### Retention and deletion
 
-Settings remain in Chrome's local extension storage until the user deletes the relevant profiles or removes the extension. Users can delete profiles from the LiveHeader popup.
+Settings remain in the browser's local extension storage until the user deletes the relevant profiles or removes the extension. Users can delete profiles from the LiveHeader popup.
 
 ### Permissions
 
@@ -34,13 +34,13 @@ For privacy questions, contact the publisher through the [LiveHeader GitHub repo
 
 ## 日本語
 
-LiveHeaderは、利用者が設定したカスタムHTTPリクエストヘッダーおよびレスポンスヘッダーを、条件に一致する通信に適用するChrome拡張機能です。
+LiveHeaderは、利用者が設定したカスタムHTTPリクエストヘッダーおよびレスポンスヘッダーを、条件に一致する通信に適用するChromeおよびFirefox向けの拡張機能です。
 
 ### 端末内に保存する情報
 
-LiveHeaderは、プロファイル名と有効状態、利用者が入力したリクエスト・レスポンスヘッダー名および値、URLパターン、HTTPメソッド、選択中のプロファイルIDを、Chromeのローカル拡張機能ストレージ（`chrome.storage.local`）に保存します。
+LiveHeaderは、プロファイル名と有効状態、利用者が入力したリクエスト・レスポンスヘッダー名および値、URLパターン、HTTPメソッド、選択中のプロファイルIDを、ブラウザーのローカル拡張機能ストレージ（`chrome.storage.local`）に保存します。
 
-LiveHeaderは、閲覧履歴の一覧、ページタイトル、アクセス時刻、ページ内容、Cookieを記録・保存しません。設定されたルールを適用するため、ChromeのDeclarative Net Requestエンジンが、現在のリクエストURLとHTTPメソッドを利用者の設定した条件と照合します。この照合URLを開発者へ送信したり、LiveHeader内に記録したりすることはありません。
+LiveHeaderは、閲覧履歴の一覧、ページタイトル、アクセス時刻、ページ内容、Cookieを記録・保存しません。設定されたルールを適用するため、ブラウザーのDeclarative Net Requestエンジンが、現在のリクエストURLとHTTPメソッドを利用者の設定した条件と照合します。この照合URLを開発者へ送信したり、LiveHeader内に記録したりすることはありません。
 
 ### 情報の利用と共有
 
@@ -50,7 +50,7 @@ LiveHeaderは、プロファイル、ヘッダー値、一致したURL、その�
 
 ### 保存期間と削除
 
-設定は、利用者が該当するプロファイルを削除するか、拡張機能を削除するまでChromeのローカル拡張機能ストレージに保存されます。プロファイルはLiveHeaderのポップアップから削除できます。
+設定は、利用者が該当するプロファイルを削除するか、拡張機能を削除するまでブラウザーのローカル拡張機能ストレージに保存されます。プロファイルはLiveHeaderのポップアップから削除できます。
 
 ### 権限
 
